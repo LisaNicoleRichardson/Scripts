@@ -11,6 +11,7 @@ library(plyr)
 library(memisc)
 library(xlsx)
 
+
 #Set working directory to raw data location
 #Raw data is rectangle leve data published annually as part of Sea Fisheries Statistics
 setwd('~/Scripts')
@@ -34,10 +35,11 @@ mapData<- aggregate(cbind(rect$LiveWeightT,rect$ValueGBP) ,
                     rect$SpeciesPub,
                     rect$LG,
                     rect$GearCat,
-                    rect$VessNat), sum)
+                    rect$VessNat,
+                    rect$SpeciesGroup), sum)
 
 #Create map data
-colnames(mapData)<- c("Year","Rect","Species","Length","Gear","VessNat","QtyT","ValGBP")
+colnames(mapData)<- c("Year","Rect","Species","Length","Gear","VessNat","SpeciesGroup","QtyT","ValGBP")
 mapData <- as.data.table(mapData)
 mapData <- mapData[!(mapData$Rect =="UNK"),]
 mapData <- mapData[!(mapData$Rect =="00Z5"),]
